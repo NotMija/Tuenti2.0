@@ -1,0 +1,32 @@
+<h1>Mi cuenta</h1>
+
+<div class="photo-section">
+    {{#if cloudinaryImageUrl}}
+        <img src="{{cloudinaryImageUrl}}" alt="Foto de perfil">
+    {{else}}
+        <!-- Agrega una imagen por defecto cuando cloudinaryImageUrl está vacío -->
+        <img src="../img/666201.png" alt="Imagen por defecto">
+    {{/if}}
+</div>
+
+<div id="BottomInfo">
+{{>editInfo}}
+</div>
+
+{{#each comentarios}}
+  <div class="comment">
+    <p>{{this.text}}</p>
+    {{#if this.isOwner}} <!-- Agregar el botón de borrar solo si es el propietario del comentario -->
+      <form action="/delete-comment" method="POST">
+        <input type="hidden" name="commentId" value="{{this.id}}">
+        <button type="submit">Borrar</button>
+      </form>
+    {{/if}}
+  </div>
+{{/each}}
+
+<!-- Formulario para agregar comentarios -->
+<form action="/add-comment" method="POST">
+  <textarea name="comment" placeholder="Escribe un comentario"></textarea>
+  <button type="submit">Comentar</button>
+</form>
