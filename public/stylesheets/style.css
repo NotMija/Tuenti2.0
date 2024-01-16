@@ -1,8 +1,24 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  background-color: aliceblue
+};
 
 a {
-  color: #00B7FF;
+  color: #002aff;
+};
+
+#login{
+  font-size: 2rem
+};
+
+#boxLogin{
+  background-color: rgb(43, 144, 226);
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+#nav{
+
 }

@@ -3,6 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+
   <style>
     nav {
       display: none;
@@ -10,7 +11,8 @@
   </style>
 </head>
 
-<h1>Login</h1>
+<h1 id="login">Login</h1>
+<div id="boxLogin">
 <form action="/auth/login" method="post">
     <div>
         <label for="email">Email:</label>
@@ -26,3 +28,5 @@
     {{/each}}
 </form>
 <p>No tienes una cuenta? <a href="/auth/register">Regístrate aquí</a></p>
+
+</div>
