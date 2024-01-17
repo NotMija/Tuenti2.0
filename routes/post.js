@@ -1,130 +1,86 @@
 const express = require("express");
 const router = express.Router();
+
 const prisma = require("../prisma");
 
 router.get("/", async (req, res) => {
   try {
-    const allPosts = await fetchAndSortPosts(prisma);
-
-    res.render("allPosts", { title: "All the Posts", posts: allPosts });
+    const allPosts = await prisma.post.findMany();
+    allPosts.sort((a, b) => {
+      const dateA = new Date(a.createdAt);
+      const dateB = new Date(b.createdAt);
+      return dateB - dateA;
+    });
+    res.render("home", { title: "All the Posts", posts: allPosts });
   } catch (error) {
-    console.error("Error fetching posts:", error);
     res.json("Server Error");
   }
 });
 
 router.get("/create", async (req, res) => {
-  res.render("newPost", { title: "Create new post" });
-});
+  res.render("newPost", {title: "Create new post"})
+})
 router.post("/create", async (req, res) => {
   try {
-    const { title, content } = req.body;
-    const authorId = req.user.id;
-
+    const { title, content, published } = req.body;
     const newPost = await prisma.post.create({
       data: {
         title,
         content,
-        author: {
-          connect: {
-            id: authorId,
-          },
-        },
+        published: !!published,
       },
     });
-
-    res.redirect(`/posts/${newPost.id}`);
+    res.redirect("/posts");
   } catch (error) {
-    console.error(error);
     res.json("Server Error");
   }
 });
 
 router.get("/edit/:id", async (req, res) => {
-  const postId = req.params.id;
   const editID = await prisma.post.findUnique({
     where: {
-      id: postId,
+      id: req.params.id,
     },
   });
-  res.render("editPost", { title: editID.title, posts: editID });
-});
+  res.render("editPost", {title: editID.title, posts: editID})
+})
 
 router.put("/edit/:id", async (req, res) => {
   try {
-    const postId = req.params.id;
-    const { title, content } = req.body;
-
-    const postToEdit = await prisma.post.findUnique({
+    const { title, content, published } = req.body;
+    const editPost = await prisma.post.update({
       where: {
-        id: postId,
+        id: req.params.id,
       },
-      include: {
-        author: true,
+      data: {
+        title,
+        content,
+        published: !!published,
       },
     });
-
-    const isAuthor = req.user && req.user.id === postToEdit.author.id;
-
-    if (isAuthor) {
-      const editPost = await prisma.post.update({
-        where: {
-          id: postId,
-        },
-        data: {
-          title,
-          content,
-        },
-      });
-
-      res.redirect(`/posts/${editPost.id}`);
-    } else {
-      res.status(403).send("Unauthorized: You cannot edit this post.");
-    }
+    res.redirect(`/posts/${editPost.id}`);
   } catch (error) {
     res.json("Server Error");
   }
 });
 
 router.get("/delete/:id", async (req, res) => {
-  const postId = req.params.id;
-
   const deleteID = await prisma.post.findUnique({
     where: {
-      id: postId,
-    },
-    include: {
-      author: true,
+      id: req.params.id,
     },
   });
-  res.render("deletePost", { title: deleteID.title, posts: deleteID });
-});
+  res.render("deletePost", {title: deleteID.title, posts: deleteID})
+})
 
 router.delete("/delete/:id", async (req, res) => {
   try {
-    const postId = req.params.id;
-
-    const postToDelete = await prisma.post.findUnique({
+    const deletePost = await prisma.post.delete({
       where: {
-        id: postId,
-      },
-      include: {
-        author: true,
+        id: req.params.id,
       },
     });
-
-    const isAuthor = req.user && req.user.id === postToDelete.author.id;
-
-    if (isAuthor) {
-      const deletePost = await prisma.post.delete({
-        where: {
-          id: postId,
-        },
-      });
-      res.redirect("/");
-    } else {
-      res.status(403).send("Unauthorized: You cannot delete this post.");
-    }
+    res.redirect("/");
   } catch (error) {
     res.json("Server Error");
   }
@@ -136,14 +92,12 @@ router.get("/:id", async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: {
-        author: true,
-      },
     });
-    res.render("post", { title: postID.title, posts: postID, user: req.user });
+    res.render("singlePost", { title: postID.title, posts: postID });
   } catch (error) {
     res.json("Server Error");
-  }
+  } 
 });
+
 
 module.exports = router;
