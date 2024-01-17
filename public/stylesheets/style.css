@@ -1,24 +1,71 @@
 body {
-  padding: 50px;
+  padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: aliceblue
-};
-
-a {
-  color: #002aff;
-};
-
-#login{
-  font-size: 2rem
-};
-
-#boxLogin{
-  background-color: rgb(43, 144, 226);
-  border-radius: 50px;
-  align-items: center;
-  justify-content: center;
 }
 
-#nav{
+a {
+  color: white;
+}
 
+.backG{
+  background-image: url(/img/ia-dia-a-dia.png);
+  background-size: 100% 100%; /* Ajusta el tamaño de la imagen para cubrir toda la pantalla */
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0; /* Elimina el margen predeterminado del cuerpo */
+  height: 100vh 
+}
+.togheterBox {
+  flex-direction: column;
+  background-color: rgb(20, 92, 235);
+  border-radius: 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 200px;
+  width: 400px;
+  padding: 20px;
+  margin-top: 200px;
+  margin-left: 100px;
+}
+
+.titleLoginRe {
+  font-size: 2rem;
+  color: white;
+}
+
+.boxLoginRe {
+  color: azure;
+  font-size: 1rem;
+}
+
+nav {
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgb(66, 174, 250);
+}
+
+button{
+  background-color: rgb(0, 162, 255);
+  border-radius: 10px;
+  border: 2px color(gray);
+}
+
+.boxComment{
+  flex-direction: column;
+  border-radius: 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 200px;
+  width: 400px;
+  padding: 20px;
+  margin-top: 200px;
+  margin-left: 50px;
+}
+
+#BottomInfo{
+  margin-top: 20px;
 }

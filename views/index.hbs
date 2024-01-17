@@ -1,4 +1,3 @@
-<h1>Mi cuenta</h1>
 
 <div class="photo-section">
     {{#if cloudinaryImageUrl}}
@@ -13,6 +12,7 @@
 {{>editInfo}}
 </div>
 
+<div class="boxComment">
 {{#each comentarios}}
   <div class="comment">
     <p>{{this.text}}</p>
@@ -30,3 +30,5 @@
   <textarea name="comment" placeholder="Escribe un comentario"></textarea>
   <button type="submit">Comentar</button>
 </form>
+
+</div>

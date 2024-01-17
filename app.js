@@ -26,6 +26,8 @@ const indexRouter = require('./routes/index');
 
 const authRoutes = require('./routes/auth');
 
+const boardRoutes = require('./routes/post');
+
 const app = express();
 
 app.use(session({
@@ -55,6 +57,8 @@ require('./config/cloudinary');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use('/', indexRouter);
+
+app.use('/', boardRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
