@@ -69,6 +69,15 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
+
+  app.use(express.urlencoded({ extended: true }));
+
+  app.post('/saveProfileChanges', (req, res) => {
+    const { universityStudies, professionalPath, school, leisureAreas } = req.body;
+    // Aquí puedes hacer lo que necesites con los datos, como almacenarlos en una base de datos
+    console.log('Datos recibidos:', { universityStudies, professionalPath, school, leisureAreas });
+    res.redirect('/'); // Redirige a la página principal después de procesar los datos
+});
   
   res.locals.error = req.app.get('env') === 'development' ? err : {}; 
   // render the error page

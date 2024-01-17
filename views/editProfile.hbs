@@ -2,17 +2,18 @@
 
 <p>Rellena los campos</p>
 
-<!-- Resto del formulario -->
-<label for="universityStudies">Estudios Universitarios:</label>
-<input type="text" id="universityStudies" name="universityStudies">
+<form action="/saveProfileChanges" method="post">
+    <label for="universityStudies">Estudios Universitarios:</label>
+    <input type="text" id="universityStudies" name="universityStudies">
 
-<label for="professionalPath">Trayectoria Profesional:</label>
-<input type="text" id="professionalPath" name="professionalPath">
+    <label for="professionalPath">Trayectoria Profesional:</label>
+    <input type="text" id="professionalPath" name="professionalPath">
 
-<label for="school">Colegio:</label>
-<input type="text" id="school" name="school">
+    <label for="school">Colegio:</label>
+    <input type="text" id="school" name="school">
 
-<label for="leisureAreas">Zonas de Ocio:</label>
-<input type="text" id="leisureAreas" name="leisureAreas">
+    <label for="leisureAreas">Zonas de Ocio:</label>
+    <input type="text" id="leisureAreas" name="leisureAreas">
 
-<button type="submit" onclick="saveProfileChanges()">Guardar</button>
+    <input type="submit" value="Guardar">
+</form>

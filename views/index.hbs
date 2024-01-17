@@ -12,12 +12,12 @@
 {{>editInfo}}
 </div>
 
-<div class="boxComment">
+<div class="boxComment"></div>
 {{#each comentarios}}
   <div class="comment">
     <p>{{this.text}}</p>
     {{#if this.isOwner}} <!-- Agregar el botón de borrar solo si es el propietario del comentario -->
-     <form action="/comment" method="post">
+      <form action="/delete-comment" method="POST">
         <input type="hidden" name="commentId" value="{{this.id}}">
         <button type="submit">Borrar</button>
       </form>
@@ -26,9 +26,7 @@
 {{/each}}
 
 <!-- Formulario para agregar comentarios -->
-<form action="/comment" method="POST">
+<form action="/add-comment" method="POST">
   <textarea name="comment" placeholder="Escribe un comentario"></textarea>
   <button type="submit">Comentar</button>
 </form>
-
-</div>
