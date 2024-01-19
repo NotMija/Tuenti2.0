@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     },
   });
 
-  res.render('profile', { user: req.user, weeklies });
+  res.render('index', { user: req.user, weeklies });
 });
 
 router.get('/update', (req, res) => {
