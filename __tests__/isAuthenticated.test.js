@@ -25,7 +25,7 @@ describe('isAuthenticated Middleware', () => {
 
     isAuthenticated(req, res, next);
 
-    expect(res.redirect).toHaveBeenCalledWith("/auth/login-page");
+    expect(res.redirect).toHaveBeenCalledWith("/auth/login");
     expect(next).not.toHaveBeenCalled();
   });
 });

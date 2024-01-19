@@ -1,6 +1,6 @@
-<h1>Rellena la informacion</h1>
+<h1 class="formH1">Rellena la informacion</h1>
 
-<form action="/profile?_method=PUT" method="post">
+<form class="formProfile" action="/profile?_method=PUT" method="post">
   <label for="profileImage">Imagen de Perfil:</label>
   <input type="file" id="profileImage" name="profileImage" accept="image/*">
   <label for="username">
@@ -12,5 +12,17 @@
     <input type="email" name="email" placeholder="Email" value="{{user.email}}">
   </label>
 
-  <button type="submit">Save</button>
+  <label for="universityStudies">Estudios Universitarios:</label>
+  <input type="text" id="universityStudies" name="universityStudies">
+
+  <label for="professionalPath">Trayectoria Profesional:</label>
+  <input type="text" id="professionalPath" name="professionalPath">
+
+  <label for="school">Colegio:</label>
+  <input type="text" id="school" name="school">
+
+  <label for="leisureAreas">Zonas de Ocio:</label>
+  <input type="text" id="leisureAreas" name="leisureAreas">
+
+  <button class="buttonForm" type="submit">Save</button>
 </form>

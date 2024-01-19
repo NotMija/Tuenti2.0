@@ -123,10 +123,6 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-router.get('/editProfile', (req, res) => {
-  res.render('editProfile');
-});
-
 router.get('/profileForm', (req, res) => {
   res.render('profileForm');
 });
