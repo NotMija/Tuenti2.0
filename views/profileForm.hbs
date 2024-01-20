@@ -1,8 +1,11 @@
-<h1 class="formH1">Rellena la informacion</h1>
+<!-- views/profile.hbs -->
 
-<form class="formProfile" action="/profile?_method=PUT" method="post">
-  <label for="profileImage">Imagen de Perfil:</label>
-  <input type="file" id="profileImage" name="profileImage" accept="image/*">
+<h1 class="formH1">Rellena la información</h1>
+
+<form class="formProfile" action="/profile?_method=PUT" method="POST">
+  <!-- Utiliza un campo oculto para indicar que es una solicitud PUT -->
+  <input type="hidden" name="_method" value="PUT">
+
   <label for="username">
     Username:
     <input type="text" name="username" placeholder="Username" value="{{user.username}}">

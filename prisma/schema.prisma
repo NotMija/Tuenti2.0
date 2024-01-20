@@ -11,23 +11,35 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  username  String?   @unique
-  password  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  photo     String?   
-  posts     Post[]
-  isAdmin   Boolean   @default(false)
+  id                String   @id @default(uuid())
+  email             String   @unique
+  username          String?  @unique
+  password          String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  photo             String?
+  posts             Post[]
+  isAdmin           Boolean  @default(false)
+  universityStudies String?
+  professionalPath  String?
+  school            String?
+  leisureAreas      String?
 }
 
 model Post {
-  id               String    @id @default(uuid())
-  userId           String
-  body             String
-  photo            String   
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-  user             User      @relation(fields: [userId], references: [id])
+  id        String   @id @default(uuid())
+  userId    String
+  body      String
+  photo     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  userId    String
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

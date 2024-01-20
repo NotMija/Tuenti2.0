@@ -1,3 +1,10 @@
+<div class="principalBox">
+<form action="/uploadPhoto" method="post" enctype="multipart/form-data">
+    <!-- Resto de los campos del formulario -->
+
+    <input type="file" name="photo" accept="image/*">
+    <button type="submit">Subir Foto</button>
+</form>
 
 <div class="photo-section">
     {{#if cloudinaryImageUrl}}
@@ -12,16 +19,22 @@
 {{>editInfo}}
 </div>
 
+<h1>Bienvenido {{user.username}}!</h1>
+
+<p>Apodo: {{user.username}}</p>
+<p>Correo electrónico: {{user.email}}</p>
+<p>Estudios Universitarios: {{user.universityStudies}}</p>
+<p>Trayectoria Profesional: {{user.professionalPath}}</p>
+<p>Colegio: {{user.school}}</p>
+<p>Zonas de Ocio: {{user.leisureAreas}}</p>
+
 <div class="boxComment"></div>
-{{#each comentarios}}
-  <div class="comment">
-    <p>{{this.text}}</p>
-    {{#if this.isOwner}} <!-- Agregar el botón de borrar solo si es el propietario del comentario -->
-      <form action="/delete-comment" method="POST">
-        <input type="hidden" name="commentId" value="{{this.id}}">
-        <button type="submit">Borrar</button>
-      </form>
-    {{/if}}
+
+{{#each user.posts as |post|}}
+  <div class="post">
+    <p>{{post.body}}</p>
+    <p>Foto: {{post.photo}}</p>
+    <p>Fecha de creación: {{post.createdAt}}</p>
   </div>
 {{/each}}
 
@@ -30,3 +43,5 @@
   <textarea name="comment" placeholder="Escribe un comentario"></textarea>
   <button type="submit">Comentar</button>
 </form>
+
+</div>
