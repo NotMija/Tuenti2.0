@@ -11,6 +11,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Ruta para renderizar el formulario en el index.hbs
 app.get('/', async (req, res) => {
   const users = await prisma.user.findMany();
+  if(users){
+    return users;
+  }
   res.render('index', { users });
 });
 
