@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
 
 // Ruta para renderizar el formulario en el index.hbs
 app.get('/', async (req, res) => {
@@ -17,7 +17,8 @@ app.get('/', async (req, res) => {
 // Ruta para procesar el formulario
 app.post('/profile', async (req, res) => {
   try {
-    // Lógica para actualizar la información del usuario en la base de datos
+    console.log('Datos del formulario:', req.body);
+
     const updatedUser = await prisma.user.update({
       where: {
         id: req.user.id,
@@ -31,10 +32,14 @@ app.post('/profile', async (req, res) => {
         leisureAreas: req.body.leisureAreas,
       },
     });
-    
+
+    console.log('Usuario actualizado:', updatedUser);
+
     res.redirect('/');
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error al procesar la actualización del perfil'); // Manejo de errores: envía una respuesta de error al cliente
+    res.status(500).send('Error al procesar la actualización del perfil');
   }
 });
+
+module.exports = app;
